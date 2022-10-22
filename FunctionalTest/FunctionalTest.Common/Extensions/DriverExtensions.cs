@@ -1,4 +1,5 @@
-﻿using OpenQA.Selenium;
+﻿using FunctionalTest.Common.Reporting;
+using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
 using Polly;
 using System.Collections.ObjectModel;
@@ -16,7 +17,7 @@ namespace FunctionalTest.Common.Extensions
             .WaitAndRetry(retryCount: MAX_RETRIES, sleepDurationProvider: (attemptCount) => TimeSpan.FromSeconds(attemptCount * 2),
             onRetry: (exception, sleepDuration, attemptNumber, context) =>
             {
-                Console.WriteLine($"{exception.Message}. Retrying in {sleepDuration}. {attemptNumber} / {MAX_RETRIES}");
+                ReportManager.LogInfo($"{exception.Message}. Retrying in {sleepDuration}. {attemptNumber} / {MAX_RETRIES}");
             });
 
         public static IWebElement WebElement(this IWebDriver driver, By locator)

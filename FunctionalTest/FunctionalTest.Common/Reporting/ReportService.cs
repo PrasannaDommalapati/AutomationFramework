@@ -5,7 +5,7 @@ using FunctionalTest.Common.Utilities;
 
 namespace FunctionalTest.Common.Reporting
 {
-    public class ExtentService
+    public class ReportService
     {
         public static ExtentReports _extentReports;
 
@@ -25,7 +25,7 @@ namespace FunctionalTest.Common.Reporting
 
                 reporter.Config.DocumentTitle = "Functional Report";
                 reporter.Config.ReportName = "Test Automation Report";
-                reporter.Config.Theme = Theme.Standard;
+                reporter.Config.Theme = Theme.Dark;
 
                 _extentReports.AttachReporter(reporter);
             }

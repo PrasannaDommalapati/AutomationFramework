@@ -1,6 +1,7 @@
 ﻿using AventStack.ExtentReports;
 using FunctionalTest.Common.Reporting;
 using FunctionalTest.Common.Utilities;
+using Microsoft.Extensions.Configuration;
 using NUnit.Framework.Interfaces;
 using OpenQA.Selenium;
 
@@ -8,28 +9,36 @@ namespace FunctionalTest
 {
     public class BaseTest
     {
-        private IWebDriver _driver;
+        public IWebDriver _driver;
         private DriverUtil _driverUtil;
-        private string _url = "https://www.google.co.uk";
-        private Browser _browser= Browser.CHROME;
+        private string _url;
+        private Browser _browser;
 
         [OneTimeSetUp]
         public void GlobalSetUp()
         {
+            var config = new ConfigurationBuilder()
+                 .SetBasePath(Utility.GetRootDir())
+                 .AddJsonFile("local.settings.json")
+                 .AddJsonFile("qa.settings.json", optional: true, reloadOnChange: true)
+                 .AddJsonFile("prod.settings.json", optional: true, reloadOnChange: true)
+                 .Build();
+            _url = config.GetValue<string>("baseUrl");
+            _browser = Enum.Parse<Browser>(config.GetValue<string>("browser"));
             _driverUtil = new DriverUtil();
-            ExtentTestManager.CreateParentTest(GetType().Name);
+            ReportManager.CreateParentTest(GetType().Name);
         }
 
         [OneTimeTearDown]
         public void GlobalCleanUp()
         {
-            ExtentService.GetReport().Flush();
+            ReportService.GetReport().Flush();
         }
 
-        [SetUp]
+        [SetUp, Order(0)]
         public void SetUp()
         {
-            ExtentTestManager.CreateTest(TestContext.CurrentContext.Test.Name);
+            ReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
            _driver = _driverUtil.GetDriver(_browser);
             _driver.Navigate().GoToUrl(_url);
         }

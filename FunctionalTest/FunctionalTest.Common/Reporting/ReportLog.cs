@@ -6,17 +6,17 @@ namespace FunctionalTest.Common.Reporting
     {
         public static void Pass(string message)
         {
-            ExtentTestManager.GetTest().Pass(message);
+            ReportManager.GetTest().Pass(message);
         }
         
         public static void Fail(string message, MediaEntityModelProvider media = null)
         {
-            ExtentTestManager.GetTest().Fail(message, media);
+            ReportManager.GetTest().Fail(message, media);
         }
 
         public static void Skip(string message)
         {
-            ExtentTestManager.GetTest().Skip(message);
+            ReportManager.GetTest().Skip(message);
         }
     }
 }

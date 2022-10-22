@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace FunctionalTest.Common.Reporting
 {
-    public class ExtentTestManager
+    public class ReportManager
     {
         [ThreadStatic]
         public static ExtentTest _parentTest;
@@ -14,7 +14,7 @@ namespace FunctionalTest.Common.Reporting
         [MethodImpl(MethodImplOptions.Synchronized)]
         public static ExtentTest CreateParentTest(string testName, string description = null)
         {
-            _parentTest = ExtentService.GetReport().CreateTest(testName, description);
+            _parentTest = ReportService.GetReport().CreateTest(testName, description);
             return _parentTest;
         }
 
@@ -29,6 +29,18 @@ namespace FunctionalTest.Common.Reporting
         public static ExtentTest GetTest()
         {
             return _childTest;
+        }
+
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public static void LogInfo(string message)
+        {
+            _childTest.Log(Status.Info, message);
+        }
+        
+        [MethodImpl(MethodImplOptions.Synchronized)]
+        public static void LogError(string message, MediaEntityModelProvider media = null)
+        {
+            _childTest.Log(Status.Fail, message, media);
         }
     }
 }
