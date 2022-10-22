@@ -4,7 +4,7 @@ using FunctionalTest.Pages;
 namespace FunctionalTest
 {
     [TestFixture]
-    public class ExampleTests : BaseTest
+    public class SampleTests : BaseTest
     {
         private SearchPage _searchPage;
 
@@ -23,10 +23,10 @@ namespace FunctionalTest
             _searchPage.ClickAcceptAll();
             ReportManager.LogInfo("Step1");
             _searchPage.SearchText("hello");
-            ReportManager.LogError("Step2", CaptureScreenshot("Test1"));
+            ReportManager.LogError("Step2");
             ReportManager.LogInfo("Step3");
             ReportManager.LogError("Step4");
-            Assert.True(_driver.Title.Contains("Google"));
+            Assert.Pass();
         }
 
         [Test]

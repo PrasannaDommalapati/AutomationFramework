@@ -10,9 +10,9 @@ namespace FunctionalTest
     public class BaseTest
     {
         public IWebDriver _driver;
-        private DriverUtil _driverUtil;
-        private string _url;
-        private Browser _browser;
+        public DriverUtil _driverUtil;
+        public string _url;
+        public Browser _browser;
 
         [OneTimeSetUp]
         public void GlobalSetUp()
@@ -33,14 +33,6 @@ namespace FunctionalTest
         public void GlobalCleanUp()
         {
             ReportService.GetReport().Flush();
-        }
-
-        [SetUp, Order(0)]
-        public void SetUp()
-        {
-            ReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
-           _driver = _driverUtil.GetDriver(_browser);
-            _driver.Navigate().GoToUrl(_url);
         }
 
         [TearDown]
@@ -83,12 +75,11 @@ namespace FunctionalTest
             }
         }
 
-        private MediaEntityModelProvider CaptureScreenshot(string name)
+        public MediaEntityModelProvider CaptureScreenshot(string name)
         {
             var screenshot = ((ITakesScreenshot)_driver).GetScreenshot().AsBase64EncodedString;
 
-            return MediaEntityBuilder.CreateScreenCaptureFromPath(name, screenshot)
-                                     .Build();
+            return MediaEntityBuilder.CreateScreenCaptureFromPath(name, screenshot).Build();
         }
     }
 }
