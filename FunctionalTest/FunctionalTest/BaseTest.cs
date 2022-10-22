@@ -75,11 +75,11 @@ namespace FunctionalTest
             }
         }
 
-        public MediaEntityModelProvider CaptureScreenshot(string name)
+        private MediaEntityModelProvider CaptureScreenshot(string name)
         {
             var screenshot = ((ITakesScreenshot)_driver).GetScreenshot().AsBase64EncodedString;
 
-            return MediaEntityBuilder.CreateScreenCaptureFromPath(name, screenshot).Build();
+            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(name, screenshot).Build();
         }
     }
 }

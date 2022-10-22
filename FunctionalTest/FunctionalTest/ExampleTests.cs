@@ -22,8 +22,9 @@ namespace FunctionalTest
         {
             _searchPage.ClickAcceptAll();
             ReportManager.LogInfo("Step1");
+            Assert.True(_driver.Title.Contains("Gooogle"));
             _searchPage.SearchText("hello");
-            ReportManager.LogError("Step2", CaptureScreenshot("Test1"));
+            ReportManager.LogError("Step2");
             ReportManager.LogInfo("Step3");
             ReportManager.LogError("Step4");
             Assert.True(_driver.Title.Contains("Google"));
