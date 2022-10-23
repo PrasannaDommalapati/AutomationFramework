@@ -27,6 +27,11 @@ namespace FunctionalTest.Common.Reporting
                 reporter.Config.ReportName = "Test Automation Report";
                 reporter.Config.Theme = Theme.Dark;
 
+                _extentReports.AddSystemInfo("Application Under Test", "Google Demo");
+                _extentReports.AddSystemInfo("Environment", "QA");
+                _extentReports.AddSystemInfo("Author", "Prasanna Dommalapati");
+                _extentReports.AddSystemInfo("Machine", Environment.MachineName);
+                _extentReports.AddSystemInfo("OS", Environment.OSVersion.VersionString);
                 _extentReports.AttachReporter(reporter);
             }
 

@@ -11,8 +11,8 @@ namespace FunctionalTest
     {
         public IWebDriver _driver;
         public DriverUtil _driverUtil;
-        public string _url;
-        public Browser _browser;
+
+        public RunSettings _runSettings;
 
         [OneTimeSetUp]
         public void GlobalSetUp()
@@ -23,8 +23,7 @@ namespace FunctionalTest
                  .AddJsonFile("qa.settings.json", optional: true, reloadOnChange: true)
                  .AddJsonFile("prod.settings.json", optional: true, reloadOnChange: true)
                  .Build();
-            _url = config.GetValue<string>("baseUrl");
-            _browser = Enum.Parse<Browser>(config.GetValue<string>("browser"));
+            _runSettings = config.Get<RunSettings>();
             _driverUtil = new DriverUtil();
             ReportManager.CreateParentTest(GetType().Name);
         }

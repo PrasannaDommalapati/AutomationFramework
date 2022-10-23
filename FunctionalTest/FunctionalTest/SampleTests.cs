@@ -12,8 +12,8 @@ namespace FunctionalTest
         public void SetUp()
         {
             ReportManager.CreateTest(TestContext.CurrentContext.Test.Name);
-            _driver = _driverUtil.GetDriver(_browser);
-            _driver.Navigate().GoToUrl(_url);
+            _driver = _driverUtil.GetDriver(_runSettings.Browser, _runSettings.Headless);
+            _driver.Navigate().GoToUrl(_runSettings.BaseUrl);
             _searchPage = new SearchPage(_driver);
         }
 
