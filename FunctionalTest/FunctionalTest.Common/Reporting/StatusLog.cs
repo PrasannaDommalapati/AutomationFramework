@@ -2,7 +2,7 @@
 
 namespace FunctionalTest.Common.Reporting
 {
-    public class ReportLog
+    public class StatusLog
     {
         public static void Pass(string message)
         {

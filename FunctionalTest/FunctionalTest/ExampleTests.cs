@@ -27,7 +27,7 @@ namespace FunctionalTest
             ReportManager.LogError("Step2");
             ReportManager.LogInfo("Step3");
             ReportManager.LogError("Step4");
-            Assert.True(_driver.Title.Contains("Google"));
+            Assert.True(_driver.Title.Contains("Gooogle"));
         }
 
         [Test]

@@ -50,16 +50,16 @@ namespace FunctionalTest
                 switch (status)
                 {
                     case TestStatus.Passed:
-                        ReportLog.Pass("Test Passed");
+                        StatusLog.Pass("Test Passed");
                         break;
                     case TestStatus.Skipped:
-                        ReportLog.Pass("Test Skipped");
+                        StatusLog.Pass("Test Skipped");
                         break;
                     case TestStatus.Failed:
-                        ReportLog.Fail("Test Failed");
-                        ReportLog.Fail(errorMessage);
-                        ReportLog.Fail(stackTrace);
-                        ReportLog.Fail("Screenshot", CaptureScreenshot(TestContext.CurrentContext.Test.Name));
+                        StatusLog.Fail("Test Failed");
+                        StatusLog.Fail(errorMessage);
+                        StatusLog.Fail(stackTrace);
+                        StatusLog.Fail("Screenshot", CaptureScreenshot(TestContext.CurrentContext.Test.Name));
                         break;
                     default:
                         break;
@@ -77,9 +77,8 @@ namespace FunctionalTest
 
         private MediaEntityModelProvider CaptureScreenshot(string name)
         {
-            var screenshot = ((ITakesScreenshot)_driver).GetScreenshot().AsBase64EncodedString;
-
-            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(name, screenshot).Build();
+            var screenshot = ((ITakesScreenshot)_driver).GetScreenshot();
+            return MediaEntityBuilder.CreateScreenCaptureFromBase64String(screenshot.AsBase64EncodedString, name).Build();
         }
     }
 }
