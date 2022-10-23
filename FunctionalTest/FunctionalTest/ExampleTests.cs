@@ -33,7 +33,12 @@ namespace FunctionalTest
         [Test]
         public void Test2()
         {
-            Assert.Pass();
+            _searchPage.ClickAcceptAll();
+            ReportManager.LogInfo("Step1");
+            _searchPage.SearchText("hello");
+            ReportManager.LogError("Step2");
+            ReportManager.LogInfo("Step3");
+            Assert.True(_driver.Title.Contains("Gooogle"));
         }
     }
 }

@@ -23,9 +23,7 @@ namespace FunctionalTest
             _searchPage.ClickAcceptAll();
             ReportManager.LogInfo("Step1");
             _searchPage.SearchText("hello");
-            ReportManager.LogError("Step2");
             ReportManager.LogInfo("Step3");
-            ReportManager.LogError("Step4");
             Assert.Pass();
         }
 
